@@ -1,0 +1,16 @@
+/bin/
+/.venv/
+.DS_Store
+*.tfplan
+crash.log
+
+# UI
+web/node_modules/
+web/dist/*
+!web/dist/.gitkeep
+
+# Terraform working dirs in the example (and anywhere else)
+**/.terraform/
+**/.terraform.lock.hcl
+*.tfstate
+*.tfstate.*

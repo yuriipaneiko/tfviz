@@ -1,0 +1,179 @@
+@import "tailwindcss";
+@import "@xyflow/react/dist/style.css";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --color-bg: var(--c-bg);
+  --color-panel: var(--c-panel);
+  --color-panel-2: var(--c-panel-2);
+  --color-panel-3: var(--c-panel-3);
+  --color-line: var(--c-line);
+  --color-line-strong: var(--c-line-strong);
+  --color-fg: var(--c-fg);
+  --color-muted: var(--c-muted);
+  --color-faint: var(--c-faint);
+  --color-accent: var(--c-accent);
+  --color-accent-fg: var(--c-accent-fg);
+
+  --color-create: #22c55e;
+  --color-update: #f59e0b;
+  --color-delete: #ef4444;
+  --color-replace: #a855f7;
+  --color-read: #38bdf8;
+}
+
+:root {
+  --c-bg: #f5f6f8;
+  --c-panel: #ffffff;
+  --c-panel-2: #f3f4f7;
+  --c-panel-3: #e9ebf0;
+  --c-line: #e4e7ec;
+  --c-line-strong: #cfd4dc;
+  --c-fg: #131722;
+  --c-muted: #5b6475;
+  --c-faint: #8d95a5;
+  --c-accent: #6d4aff;
+  --c-accent-fg: #ffffff;
+  --c-edge: #9aa3b5;
+  --c-dots: #d5d9e1;
+  --c-node: #ffffff;
+  --c-shadow: 0 1px 2px rgb(16 24 40 / 0.06), 0 1px 3px rgb(16 24 40 / 0.08);
+  color-scheme: light;
+}
+
+.dark {
+  --c-bg: #0b0e14;
+  --c-panel: #11151d;
+  --c-panel-2: #161b25;
+  --c-panel-3: #1d2330;
+  --c-line: #222936;
+  --c-line-strong: #2e3647;
+  --c-fg: #e7eaf0;
+  --c-muted: #8f98ab;
+  --c-faint: #5d6679;
+  --c-accent: #8b6cff;
+  --c-accent-fg: #ffffff;
+  --c-edge: #4b5568;
+  --c-dots: #1d2330;
+  --c-node: #141924;
+  --c-shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 2px 8px rgb(0 0 0 / 0.25);
+  color-scheme: dark;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--c-bg);
+  color: var(--c-fg);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--c-line-strong) transparent;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--c-accent) 35%, transparent);
+}
+
+.react-flow {
+  --xy-background-color: var(--c-bg);
+  --xy-background-pattern-dots-color-default: var(--c-dots);
+  --xy-edge-stroke-default: var(--c-edge);
+  --xy-controls-button-background-color-default: var(--c-panel);
+  --xy-controls-button-background-color-hover-default: var(--c-panel-2);
+  --xy-controls-button-color-default: var(--c-fg);
+  --xy-controls-button-border-color-default: var(--c-line);
+  --xy-minimap-background-color-default: var(--c-panel);
+  --xy-minimap-mask-background-color-default: color-mix(in srgb, var(--c-bg) 70%, transparent);
+  --xy-attribution-background-color-default: transparent;
+}
+
+.react-flow__node {
+  cursor: pointer;
+}
+
+/* Containers are only clickable through their header so panning inside them works. */
+.react-flow__node-container {
+  pointer-events: none !important;
+  cursor: default;
+}
+
+.react-flow__handle {
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  min-width: 0;
+  min-height: 0;
+  border: 0;
+  pointer-events: none;
+}
+
+.react-flow__controls {
+  box-shadow: var(--c-shadow);
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--c-line);
+}
+
+.react-flow__controls-button {
+  border-bottom: 1px solid var(--c-line);
+}
+
+.react-flow__minimap {
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--c-line);
+  box-shadow: var(--c-shadow);
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+
+.edge-flow {
+  stroke-dasharray: 6 4;
+  animation: dash 0.8s linear infinite;
+}
+
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--c-accent) 55%, transparent);
+  }
+  100% {
+    box-shadow: 0 0 0 10px transparent;
+  }
+}
+
+.pulse {
+  animation: pulse-ring 1.2s ease-out 2;
+}
+
+.code-scroll::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+
+kbd {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  padding: 1px 5px;
+  border-radius: 4px;
+  border: 1px solid var(--c-line-strong);
+  background: var(--c-panel-2);
+  color: var(--c-muted);
+}
